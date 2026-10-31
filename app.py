@@ -102,14 +102,14 @@ h1 a, h2 a, h3 a{ display:none !important; }
   color: var(--ink);
 }
 
-/* Barra lateral: piedra */
+/* Barra lateral: piedra clara con texto negro */
 section[data-testid="stSidebar"]{
-  background: repeating-conic-gradient(var(--stone) 0% 25%, #6e6e6e 0% 50%) 0 0 / 32px 32px;
+  background: repeating-conic-gradient(#a8a8a8 0% 25%, #9a9a9a 0% 50%) 0 0 / 32px 32px;
   border-right: 4px solid #1f1f1f;
 }
 section[data-testid="stSidebar"] *{
-  color:#fff !important;
-  text-shadow:2px 2px 0 #2b2b2b;
+  color:#000 !important;
+  text-shadow:none !important;
   font-family:'VT323', monospace !important;
 }
 section[data-testid="stSidebar"] h1,
