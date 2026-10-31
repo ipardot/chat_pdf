@@ -118,10 +118,25 @@ section[data-testid="stSidebar"] h3{
   font-size:.65rem !important;
   border-bottom:none;
 }
-/* Botones y avisos: conservan los colores originales de Streamlit (contraste) */
-button [data-testid="stMarkdownContainer"],
-button [data-testid="stMarkdownContainer"] *,
-[data-testid="stAlert"] [data-testid="stMarkdownContainer"] *{
+/* Textos sobre fondos claros: siempre en negro (también si Streamlit usa el tema oscuro) */
+.stApp [data-testid="stWidgetLabel"] p,
+.stApp [data-testid="stWidgetLabel"] label,
+.stApp [data-testid="stMarkdownContainer"] p,
+.stApp [data-testid="stMarkdownContainer"] li,
+.stApp [data-testid="stCaptionContainer"],
+.stApp [data-testid="caption"],
+.stApp [data-testid="stSliderThumbValue"],
+.stApp [data-testid="stSliderTickBarMin"],
+.stApp [data-testid="stSliderTickBarMax"],
+.stApp [data-testid="stFileUploaderFile"] *,
+.stApp [data-testid="stAlert"] [data-testid="stMarkdownContainer"] *{
+  color:#1a1a1a !important;
+}
+
+/* Botones: conservan los colores originales de Streamlit (contraste) */
+.stApp button [data-testid="stMarkdownContainer"],
+.stApp button [data-testid="stMarkdownContainer"] *,
+.stApp button [data-testid="stMarkdownContainer"] p{
   color:inherit !important;
   font-family:inherit !important;
 }
