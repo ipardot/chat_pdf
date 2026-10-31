@@ -14,201 +14,114 @@ import platform
 # ------------------------------------------------------------------
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;600;700&display=swap');
 
 :root{
-  --grass:#5d9b3a;
-  --grass-dark:#3f6b27;
-  --dirt:#7a4e24;
-  --stone:#7f7f7f;
-  --stone-dark:#4a4a4a;
-  --stone-light:#c6c6c6;
-  --parchment:#f3e9d2;
-  --parchment-edge:#d8c9a3;
-  --ink:#3b2f1e;
-  --gold:#fcdb05;
-  --diamond:#4aedd9;
+  --cielo:#eef4f7;
+  --pasto:#5d9b3a;
+  --pasto-oscuro:#3f6b27;
+  --pasto-claro:#e3efd9;
+  --tierra:#866043;
+  --piedra:#8b8b8b;
+  --piedra-clara:#ededeb;
+  --diamante:#2fb8a8;
+  --tinta:#2b2b2b;
 }
 
-/* Fondo: cielo + franja de pasto y tierra abajo */
+/* Fondo: cielo suave con el suelo de pasto y tierra abajo */
 .stApp{
   background:
     linear-gradient(to bottom,
-      transparent calc(100% - 90px),
-      var(--grass) calc(100% - 90px),
-      var(--grass) calc(100% - 74px),
-      var(--grass-dark) calc(100% - 74px),
-      var(--grass-dark) calc(100% - 66px),
-      var(--dirt) calc(100% - 66px)),
-    linear-gradient(#6ec0ff 0%, #bfe6ff 100%);
+      transparent calc(100% - 64px),
+      var(--pasto) calc(100% - 64px),
+      var(--pasto) calc(100% - 52px),
+      var(--tierra) calc(100% - 52px)),
+    var(--cielo);
   background-attachment: fixed;
-  font-family: 'VT323', monospace;
 }
 header[data-testid="stHeader"]{ background: transparent; }
 
-/* Panel central: página de wiki (pergamino) */
+/* Panel central: bloque de pasto (borde verde + franja de tierra) */
 [data-testid="stMainBlockContainer"], .block-container{
-  background: var(--parchment);
-  border: 4px solid #2b2b2b;
-  box-shadow: inset 0 0 0 4px var(--parchment-edge), 8px 8px 0 rgba(0,0,0,.35);
-  margin-top: 2rem;
-  margin-bottom: 7rem;
-  padding: 1.5rem 2.2rem 2.2rem !important;
-  max-width: 900px;
-}
-
-/* Banner del título */
-.mc-hero{
-  display:flex; align-items:center; justify-content:center; gap:1.2rem;
-  background: var(--grass);
-  border: 4px solid #1f1f1f;
-  box-shadow: inset 4px 4px 0 #7fc257, inset -4px -4px 0 var(--grass-dark), 5px 5px 0 rgba(0,0,0,.3);
-  padding: 1.1rem 1rem;
-  margin: .5rem 0 1.4rem;
-  text-align:center;
-}
-.mc-hero svg{ width:56px; height:56px; image-rendering:pixelated; flex:none; }
-.mc-title{
-  font-family:'Press Start 2P', monospace;
-  font-size:1.5rem; color:#fff;
-  text-shadow:3px 3px 0 #2b4a1a;
-  line-height:1.4;
-}
-.mc-sub{
-  font-family:'VT323', monospace;
-  font-size:1.6rem; color:#fffbe0;
-  text-shadow:2px 2px 0 #2b4a1a;
-  margin-top:.35rem;
+  background:#fffefb;
+  border-radius:6px;
+  border-top:10px solid var(--pasto);
+  box-shadow: inset 0 8px 0 var(--tierra), 0 18px 40px rgba(40,60,30,.14);
+  margin-top:2rem;
+  margin-bottom:6rem;
+  padding:2.4rem 2.4rem 2.4rem !important;
+  max-width:780px;
 }
 @media (max-width:640px){
-  .mc-title{ font-size:1rem; }
-  .mc-sub{ font-size:1.25rem; }
-  .mc-hero svg{ width:36px; height:36px; }
+  [data-testid="stMainBlockContainer"], .block-container{
+    padding:2rem 1.1rem 1.8rem !important;
+  }
 }
 
-/* Tipografía del contenido */
-h2, h3{
-  font-family:'Press Start 2P', monospace !important;
-  color: var(--ink) !important;
-  font-size: .95rem !important;
-  line-height:1.6 !important;
-  border-bottom: 4px solid var(--parchment-edge);
-  padding-bottom:.4rem;
+/* Encabezado */
+.mc-tag{
+  display:inline-flex; align-items:center; gap:.45rem;
+  font-family:'Nunito', sans-serif;
+  font-weight:700; font-size:.8rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--pasto-oscuro);
+  background:var(--pasto-claro);
+  padding:.3rem .8rem; border-radius:4px;
 }
-h1 a, h2 a, h3 a{ display:none !important; }
-.stApp p, .stApp li, .stApp label, [data-testid="stMarkdownContainer"]{
-  font-family:'VT323', monospace !important;
-  font-size:1.3rem;
-  color: var(--ink);
+.mc-tag svg{ width:18px; height:18px; }
+.mc-title{
+  font-family:'Press Start 2P', monospace;
+  font-size:1.7rem; line-height:1.45;
+  color:var(--tinta);
+  margin:1rem 0 .7rem;
 }
-
-/* Barra lateral: piedra clara con texto negro */
-section[data-testid="stSidebar"]{
-  background: repeating-conic-gradient(#a8a8a8 0% 25%, #9a9a9a 0% 50%) 0 0 / 32px 32px;
-  border-right: 4px solid #1f1f1f;
+.mc-title span{ color:var(--pasto); }
+.mc-sub{
+  font-family:'Nunito', sans-serif;
+  font-size:1.08rem; line-height:1.55;
+  color:#5a5a55;
 }
-section[data-testid="stSidebar"] *{
-  color:#000 !important;
-  text-shadow:none !important;
-  font-family:'VT323', monospace !important;
-}
-section[data-testid="stSidebar"] h1,
-section[data-testid="stSidebar"] h2,
-section[data-testid="stSidebar"] h3{
-  font-family:'Press Start 2P', monospace !important;
-  font-size:.7rem !important;
-  line-height:1.7 !important;
-  border-bottom:none;
+@media (max-width:640px){
+  .mc-title{ font-size:1.15rem; }
 }
 
-/* Imagen con marco */
+/* Imagen: pixeles nítidos, centrada y a escala */
+[data-testid="stImage"]{ margin:1.4rem auto 0; }
 [data-testid="stImage"] img{
   image-rendering: pixelated;
-  border: 4px solid #2b2b2b;
-  box-shadow: 0 0 0 4px var(--parchment-edge), 6px 6px 0 4px rgba(0,0,0,.3);
+  max-width:150px;
+  display:block; margin:0 auto;
 }
 
-/* Campos de entrada: solo apariencia */
-[data-testid="stTextInput"] input,
-[data-testid="stTextArea"] textarea{
-  background:#262626 !important;
-  color:#fff !important;
-  font-family:'VT323', monospace !important;
-  font-size:1.3rem !important;
-  border:4px solid #000 !important;
-  border-radius:0 !important;
-  box-shadow: inset 3px 3px 0 #0a0a0a, inset -3px -3px 0 #5a5a5a !important;
+/* Textos del contenido */
+[data-testid="stMarkdownContainer"] p,
+[data-testid="stMarkdownContainer"] li{
+  font-family:'Nunito', sans-serif;
+  color:var(--tinta);
+  line-height:1.6;
 }
-[data-testid="stTextInput"] input:focus,
-[data-testid="stTextArea"] textarea:focus{
-  outline:none !important;
-  border-color: var(--diamond) !important;
-}
-[data-testid="stTextInput"] > div > div,
-[data-testid="stTextArea"] > div > div{
-  border-radius:0 !important; border:none !important; background:transparent !important;
-}
-
-/* Cargador de archivos */
-[data-testid="stFileUploader"] section{
-  background:#3a3a3a !important;
-  border:4px dashed var(--stone-light) !important;
-  border-radius:0 !important;
-}
-[data-testid="stFileUploader"] section *{ color: var(--stone-light) !important; }
-
-/* Botones: bloque de piedra */
-.stButton > button,
-[data-testid="stFileUploader"] button,
-[data-testid="stBaseButton-secondary"]{
+h2, h3{
   font-family:'Press Start 2P', monospace !important;
-  font-size:.6rem !important;
-  color:#fff !important;
-  background: var(--stone) !important;
-  border:4px solid #000 !important;
-  border-radius:0 !important;
-  box-shadow: inset 3px 3px 0 var(--stone-light), inset -3px -3px 0 var(--stone-dark) !important;
-  text-shadow:2px 2px 0 #3f3f3f;
-  transition:none !important;
+  font-size:.85rem !important;
+  line-height:1.7 !important;
+  color:var(--pasto-oscuro) !important;
+  padding-bottom:.5rem;
+  border-bottom:3px solid var(--pasto-claro);
 }
-.stButton > button:hover,
-[data-testid="stFileUploader"] button:hover{
-  background:#8f9fff !important;
-  box-shadow: inset 3px 3px 0 #c8d0ff, inset -3px -3px 0 #4a56a8 !important;
-}
+h1 a, h2 a, h3 a{ display:none !important; }
 
-/* Alertas: bloques de mineral */
-[data-testid="stAlert"]{
-  border-radius:0 !important;
-  border:4px solid #000 !important;
-  box-shadow:4px 4px 0 rgba(0,0,0,.3);
+/* Barra lateral: piedra clara */
+section[data-testid="stSidebar"]{
+  background:var(--piedra-clara);
+  border-right:4px solid var(--piedra);
 }
-[data-testid="stAlert"] *{
-  color:#fff !important;
-  font-family:'VT323', monospace !important;
-  font-size:1.25rem !important;
+section[data-testid="stSidebar"] h3{
+  font-size:.65rem !important;
+  border-bottom:none;
 }
-div[data-testid="stAlert"]:has([data-testid="stAlertContentInfo"]){ background:#2f4f6f !important; }
-div[data-testid="stAlert"]:has([data-testid="stAlertContentSuccess"]){ background:#1f6b35 !important; }
-div[data-testid="stAlert"]:has([data-testid="stAlertContentWarning"]){ background:#8a6d00 !important; }
-div[data-testid="stAlert"]:has([data-testid="stAlertContentError"]){ background:#8a1111 !important; }
-
-/* Código / traceback */
-pre, code{
-  font-family:'VT323', monospace !important;
-  background:#111 !important;
-  color:#17dd62 !important;
-  border-radius:0 !important;
-}
-
-/* Scrollbar cuadrada */
-::-webkit-scrollbar{ width:14px; height:14px; }
-::-webkit-scrollbar-track{ background:#1a1a1a; }
-::-webkit-scrollbar-thumb{ background:var(--stone); border:3px solid #000; }
 </style>
 """, unsafe_allow_html=True)
 
-# Título tipo wiki (con gemas de píxeles de diseño propio)
+# Título tipo wiki (con una gema de píxeles de diseño propio)
 GEMA = """
 <svg viewBox="0 0 16 16" shape-rendering="crispEdges" xmlns="http://www.w3.org/2000/svg">
   <rect x="5" y="2" width="6" height="1" fill="#9ffcf0"/>
@@ -224,14 +137,9 @@ GEMA = """
 </svg>
 """
 st.markdown(f"""
-<div class="mc-hero">
-  {GEMA}
-  <div>
-    <div class="mc-title">MINECRAFT WIKI</div>
-    <div class="mc-sub">Pregúntame lo que quieras saber de Minecraft</div>
-  </div>
-  {GEMA}
-</div>
+<span class="mc-tag">{GEMA} Wiki con IA</span>
+<div class="mc-title">Minecraft <span>Wiki</span></div>
+<div class="mc-sub">Sube una guía o manual de Minecraft en PDF y pregúntame lo que quieras: crafteos, mobs, biomas y más.</div>
 """, unsafe_allow_html=True)
 
 st.write("Versión de Python:", platform.python_version())
@@ -245,17 +153,17 @@ except Exception as e:
 
 # Sidebar information
 with st.sidebar:
-    st.subheader("Este Agente te ayudará a realizar análisis sobre el PDF cargado")
+    st.subheader("⛏️ Este agente lee tu PDF de Minecraft y responde tus preguntas sobre él")
 
 # Get API key from user
-ke = st.text_input('Ingresa tu Clave de OpenAI', type="password")
+ke = st.text_input('🔑 Ingresa tu clave de OpenAI', type="password")
 if ke:
     os.environ['OPENAI_API_KEY'] = ke
 else:
-    st.warning("Por favor ingresa tu clave de API de OpenAI para continuar")
+    st.warning("Ingresa tu clave de OpenAI para entrar al mundo.")
 
 # PDF uploader
-pdf = st.file_uploader("Carga el archivo PDF", type="pdf")
+pdf = st.file_uploader("📜 Carga tu PDF (guía, wiki o manual de Minecraft)", type="pdf")
 
 # Process the PDF if uploaded
 if pdf is not None and ke:
@@ -266,7 +174,7 @@ if pdf is not None and ke:
         for page in pdf_reader.pages:
             text += page.extract_text()
         
-        st.info(f"Texto extraído: {len(text)} caracteres")
+        st.info(f"Texto minado: {len(text)} caracteres")
         
         # Split text into chunks
         text_splitter = CharacterTextSplitter(
@@ -276,15 +184,15 @@ if pdf is not None and ke:
             length_function=len
         )
         chunks = text_splitter.split_text(text)
-        st.success(f"Documento dividido en {len(chunks)} fragmentos")
+        st.success(f"Documento dividido en {len(chunks)} bloques")
         
         # Create embeddings and knowledge base
         embeddings = OpenAIEmbeddings()
         knowledge_base = FAISS.from_texts(chunks, embeddings)
         
         # User question interface
-        st.subheader("Escribe qué quieres saber sobre el documento")
-        user_question = st.text_area(" ", placeholder="Escribe tu pregunta aquí...")
+        st.subheader("💬 ¿Qué quieres saber?")
+        user_question = st.text_area(" ", placeholder="Ej: ¿Cómo encuentro diamantes?")
         
         # Process question when submitted
         if user_question:
@@ -301,15 +209,15 @@ if pdf is not None and ke:
             response = chain.run(input_documents=docs, question=user_question)
             
             # Display the response
-            st.markdown("### Respuesta:")
+            st.markdown("### 📖 Respuesta")
             st.markdown(response)
                 
     except Exception as e:
-        st.error(f"Error al procesar el PDF: {str(e)}")
+        st.error(f"Algo explotó al procesar el PDF: {str(e)}")
         # Add detailed error for debugging
         import traceback
         st.error(traceback.format_exc())
 elif pdf is not None and not ke:
-    st.warning("Por favor ingresa tu clave de API de OpenAI para continuar")
+    st.warning("Ingresa tu clave de OpenAI para entrar al mundo.")
 else:
-    st.info("Por favor carga un archivo PDF para comenzar")
+    st.info("Carga un PDF para comenzar la aventura.")
